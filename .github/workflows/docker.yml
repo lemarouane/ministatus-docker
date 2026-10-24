@@ -15,9 +15,7 @@ jobs:
   build-scan:
     runs-on: ubuntu-latest
 
-
-
-  steps:
+    steps:
       - name: Checkout du code
         uses: actions/checkout@v4
 
