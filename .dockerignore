@@ -1,0 +1,8 @@
+ckerignore
+.git
+.github
+__pycache__/
+*.pyc
+.venv/
+trivy-report.*
+docker-compose.yml
