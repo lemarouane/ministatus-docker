@@ -32,6 +32,14 @@ jobs:
       - name: Tests dans le conteneur
         run: docker run --rm --entrypoint python ministatus:ci -m unittest -v
 
+      - name: Installer le template HTML Trivy
+        run: |
+          mkdir -p contrib
+          curl -fsSL \
+            https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/html.tpl \
+            -o contrib/html.tpl
+          test -s contrib/html.tpl
+
       - name: Rapport Trivy (JSON)
         uses: aquasecurity/trivy-action@master
         with:
@@ -45,7 +53,7 @@ jobs:
         with:
           image-ref: ministatus:ci
           format: template
-          template: "@/contrib/html.tpl"
+          template: "@contrib/html.tpl"
           output: trivy-report.html
           exit-code: "0"
 
