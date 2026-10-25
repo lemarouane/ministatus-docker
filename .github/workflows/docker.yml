@@ -10,6 +10,7 @@ on:
   pull_request:
     branches:
       - master
+  workflow_dispatch:
 
 jobs:
   build-scan:
@@ -32,7 +33,7 @@ jobs:
         run: docker run --rm --entrypoint python ministatus:ci -m unittest -v
 
       - name: Rapport Trivy (JSON)
-        uses: aquasecurity/trivy-action@0.29.0
+        uses: aquasecurity/trivy-action@master
         with:
           image-ref: ministatus:ci
           format: json
@@ -40,7 +41,7 @@ jobs:
           exit-code: "0"
 
       - name: Rapport Trivy (HTML)
-        uses: aquasecurity/trivy-action@0.29.0
+        uses: aquasecurity/trivy-action@master
         with:
           image-ref: ministatus:ci
           format: template
@@ -72,7 +73,7 @@ jobs:
           if-no-files-found: warn
 
       - name: Quality gate (HIGH et CRITICAL)
-        uses: aquasecurity/trivy-action@0.29.0
+        uses: aquasecurity/trivy-action@master
         with:
           image-ref: ministatus:ci
           format: table
